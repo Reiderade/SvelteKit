@@ -10,5 +10,8 @@ export const days = [
 	'i18n Happy Holidays',
 	'Sort presents',
 	'Secret santa clues',
-	'Christmas tree lights'
+	'Christmas tree lights',
+	"Find Joseph's gift",
+	'Christmas tree ornaments',
+	'Secret santa list generator'
 ];
