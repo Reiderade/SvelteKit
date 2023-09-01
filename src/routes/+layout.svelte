@@ -1,14 +1,8 @@
 <script lang="ts">
 	import './app.css';
 	import { page } from '$app/stores';
-	import type { Page } from '@sveltejs/kit';
 
-	$: day = getDay($page);
-
-	function getDay(page: Page) {
-		const segments = page.route.id?.split('/');
-		return segments?.[segments.length - 1];
-	}
+	$: day = $page.data.day;
 </script>
 
 <svelte:head>
@@ -21,7 +15,7 @@
 
 <div class="container">
 	<header>
-		<a href="/">Advent of <span class="svelte">SvelteKit</span> 2022</a>
+		<a href="/" class="home">Advent of <span class="svelte">SvelteKit</span> 2022</a>
 	</header>
 
 	<main>
@@ -40,7 +34,16 @@
 		max-width: var(--size-content-3);
 	}
 
+	footer {
+		padding-bottom: 1rem;
+	}
+
 	header {
+		width: 100%;
+		text-align: center;
+	}
+
+	.home {
 		font-size: var(--font-size-fluid-2);
 		font-weight: var(--font-weight-7);
 	}
