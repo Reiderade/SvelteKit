@@ -6,5 +6,9 @@ export const days = [
 	'Recursive Christmas tree',
 	'Gift label',
 	'Gift price comparison',
-	'Drag and drop presents'
+	'Drag and drop presents',
+	'i18n Happy Holidays',
+	'Sort presents',
+	'Secret santa clues',
+	'Christmas tree lights'
 ];
