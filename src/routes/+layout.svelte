@@ -1,9 +1,22 @@
-<script>
+<script lang="ts">
 	import './app.css';
+	import { page } from '$app/stores';
+	import type { Page } from '@sveltejs/kit';
+
+	$: day = getDay($page);
+
+	function getDay(page: Page) {
+		const segments = page.route.id?.split('/');
+		return segments?.[segments.length - 1];
+	}
 </script>
 
 <svelte:head>
-	<title>Advent of SvelteKit</title>
+	{#if day}
+		<title>Advent of SvelteKit - Day {day}</title>
+	{:else}
+		<title>Advent of SvelteKit</title>
+	{/if}
 </svelte:head>
 
 <div class="container">
