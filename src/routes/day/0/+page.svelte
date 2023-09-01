@@ -17,7 +17,7 @@
 	}
 
 	function focusNextAvailableTile() {
-		const nextTile = boardEl.querySelector('button:not(:disabled');
+		const nextTile = boardEl.querySelector('button:not(:disabled)');
 		if (nextTile) {
 			(nextTile as HTMLElement).focus();
 		} else {
@@ -26,22 +26,10 @@
 	}
 
 	$: winner = checkWinner(board);
-
-	$: {
-		if (winner) {
-			state = State.Won;
-		} else if (board.every((row) => row.every((col) => col !== Move.Empty))) {
-			state = State.Draw;
-		} else {
-			state = State.Playing;
-		}
-	}
+	$: state = getGameState(winner, board);
 
 	function reset() {
 		board = getEmptyBoard();
-
-		turn = Move.O;
-		winner = undefined;
 		tick().then(focusNextAvailableTile);
 	}
 
@@ -51,6 +39,16 @@
 			[Move.Empty, Move.Empty, Move.Empty],
 			[Move.Empty, Move.Empty, Move.Empty]
 		];
+	}
+
+	function getGameState(winner: Move | undefined, board: Move[][]) {
+		if (winner) {
+			return State.Won;
+		} else if (board.every((row) => row.every((col) => col !== Move.Empty))) {
+			return State.Draw;
+		} else {
+			return State.Playing;
+		}
 	}
 </script>
 
@@ -110,6 +108,7 @@
 		aspect-ratio: 1/1;
 		background: white;
 		padding: 0.5rem;
+		height: 100px;
 	}
 
 	.status {
@@ -123,6 +122,7 @@
 		padding: 0.25rem 1rem;
 		cursor: pointer;
 		font-size: var(--size-5);
+		color: black;
 	}
 
 	button:hover {
